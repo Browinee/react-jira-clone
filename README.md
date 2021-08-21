@@ -2,7 +2,10 @@
 
 
 ### Todo
-
+- [x] Replace react-script with craco
+- [x] Add jira-dev-tool
+- [X] Auth and UnAuth component 
+- [X] Ant design and customized theme. 
 
 
 ### Teck Stack
