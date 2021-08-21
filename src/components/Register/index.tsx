@@ -5,6 +5,7 @@ import { LongButton } from "../Button";
 interface SubmitProps {
   username: string;
   password: string;
+  cpassword: string;
 }
 
 interface RegisterProps {

@@ -1,29 +1,42 @@
 import React, { useState } from "react";
-import Login from "../../../components/Login";
-import { Button, Card, Divider } from "antd";
-import Register from "../../../components/Register";
+import Login from "../../../../components/Login";
+import { Card, Divider } from "antd";
+import Register from "../../../../components/Register";
 import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
-import { LongButton } from "../../../components/Button";
+import { LongButton } from "../../../../components/Button";
+import { useAuth } from "../../../../context/auth-context";
 
+interface RegisterProps {
+  username: string;
+  password: string;
+  cpassword: string;
+}
+interface LoginProps {
+  username: string;
+  password: string;
+};
 const UnAuthenticatedApp = () => {
-  const [isRegister, setIsRegister] = useState(false);
-  const login = () => {
+  const [isRegister, setIsRegister] = useState(true);
+  const { register, login } = useAuth();
+  const loginHandler = (value: LoginProps) => {
+    login(value)
   };
-  const register = () => {
+  const registerHandler = (values: RegisterProps) => {
+    register(values)
   };
   const switchHandler = () => setIsRegister(!isRegister);
   return <Container>
     <Header />
     <Background />
     <ShadowCard>
-      <Title>{isRegister ? "Register" : "Login"}</Title>
-      {isRegister ?  <Login login={login} /> : <Register register={register}/>}
+      <Title>{isRegister ? "Login" : "Register"}</Title>
+      {isRegister ? <Login login={loginHandler} /> : <Register register={registerHandler} />}
       <Divider />
       <LongButton type={"link"} onClick={switchHandler}>
-        Switch {isRegister ? "Login" : "Register"}
+        Switch {isRegister ? "Register" : "Login"}
       </LongButton>
     </ShadowCard>
   </Container>;
@@ -40,7 +53,7 @@ const Background = styled.div`
   background-attachment: fixed;
   background-position: left bottom, right bottom;
   background-size: calc(((100vw - 40rem) / 2) - 3.2rem),
-    calc(((100vw - 40rem) / 2) - 3.2rem), cover;
+  calc(((100vw - 40rem) / 2) - 3.2rem), cover;
   background-image: url(${left}), url(${right});
 `;
 
