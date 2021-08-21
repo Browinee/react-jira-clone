@@ -3,7 +3,6 @@
 
 ### Todo
 
-- [ ] Create my first HackMD note (this one!)
 
 
 ### Teck Stack
