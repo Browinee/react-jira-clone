@@ -1,5 +1,5 @@
-import AuthenticatedApp from "./authenticatedApp";
-import UnAuthenticatedApp from "./unAuthenticatedApp";
+import AuthenticatedApp from "./components/authenticatedApp";
+import UnAuthenticatedApp from "./components/unAuthenticatedApp";
 
 
 export {
