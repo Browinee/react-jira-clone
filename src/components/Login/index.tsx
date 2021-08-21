@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
+import { LongButton } from "../Button";
 
 interface SubmitProps {
   username: string;
@@ -29,9 +30,9 @@ export const Login = (props: LoginProps) => {
         <Input placeholder={"Password"} type="password" id={"password"} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+        <LongButton type="primary" htmlType="submit">
+         Login
+        </LongButton>
       </Form.Item>
     </Form>
   );
