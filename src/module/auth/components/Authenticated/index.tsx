@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Row from "../../../../components/Row";
 import ProjectList from "../../../projectLIst";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
-import { Dropdown, Menu } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import { useAuth } from "../../../../context/auth-context";
 
 const Authenticated = () => {
@@ -19,12 +19,12 @@ const Authenticated = () => {
         <HeaderRight>
           <Dropdown overlay={<Menu>
              <Menu.Item key={"logout"}>
-               <a href="" onClick={logout}>Logout</a>
+               <Button type={"link"}>Logout</Button>
              </Menu.Item>
           </Menu>}>
-            <a href="" onClick={e => e.preventDefault()}>
+            <Button type={"link"} href="" onClick={e => e.preventDefault()}>
               Hi, {user?.name}
-            </a>
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
