@@ -1,11 +1,5 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  title: string;
-  organization: string;
-  token: string;
-}
+import { User } from "../../types/user";
+
 
 export interface AuthForm {
   username: string;
@@ -25,7 +19,7 @@ export const handleUserResponse = ({ user }: { user: User }) => {
 export const login = async (data: { username: string; password: string }) => {
   return handleUserResponse({
     user: {
-      id: "adfasdf",
+      id: 123123,
       name: "afasdf",
       email: "dd",
       title: "afdasdf",
@@ -40,7 +34,7 @@ export const logout = async () => {
 export const register = async (data: { username: string; password: string }) => {
   return handleUserResponse({
     user: {
-      id: "adfasdf",
+      id: 123,
       name: "afasdf",
       email: "dd",
       title: "afdasdf",

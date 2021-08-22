@@ -1,8 +1,9 @@
 import React, { ReactNode, useContext, useState } from "react";
 import * as auth from "../module/auth/auth-provider";
-import { AuthForm, User } from "../module/auth/auth-provider";
+import { AuthForm } from "../module/auth/auth-provider";
 import { http } from "../utils/http";
 import useMount from "../hook/useMount";
+import { User } from "../types/user";
 
 interface AuthContext {
   user: User | null;
