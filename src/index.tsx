@@ -3,15 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { loadDevTools } from "jira-dev-tool";
+import { DevTools, loadServer } from "jira-dev-tool";
 // put it behind jira-dev-tool, then our customized theme will override default theme in jira-dev-tool
 import 'antd/dist/antd.less'
 import { AppProvider } from "./context";
 
-loadDevTools(() => {
+loadServer(() => {
   ReactDOM.render(
     <React.StrictMode>
       <AppProvider>
+        <DevTools />
         <App />
       </AppProvider>
     </React.StrictMode>,
