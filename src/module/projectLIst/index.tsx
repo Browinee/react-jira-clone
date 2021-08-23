@@ -5,7 +5,9 @@ import useDebounce from "../../hook/useDebounce";
 import useMount from "../../hook/useMount";
 import useProjects from "../../hook/useProjects";
 import useUsers from "../../hook/useUsers";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
+import Row from "../../components/Row";
+import styled from "@emotion/styled";
 
 const ProjectList = () => {
   const [param, setParam] = useState({
@@ -16,14 +18,27 @@ const ProjectList = () => {
   const { isLoading, error, data: list } = useProjects(debouncedParam);
   const { data: users } = useUsers();
   return (
-    <div>
+    <ScreenContainer>
+      <Row marginBottom={2} between={true}>
+        <h1>Item List</h1>
+        <Button onClick={() => {}} type={"link"}>
+          Create Item
+        </Button>
+      </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
       ) : null}
       <List users={users || []} dataSource={list || []} loading={isLoading} />
-    </div>
+    </ScreenContainer>
   );
 };
 
 export default ProjectList;
+
+export const ScreenContainer = styled.div`
+  padding: 3.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
