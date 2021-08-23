@@ -13,8 +13,8 @@ const Authenticated = () => {
       <Header between={true}>
         <HeaderLeft gap={true}>
           <SoftwareLogo width={"18rem"} color={"rgb(38.132, 255)"} />
-          <h2>項目</h2>
-          <h2>用戶</h2>
+          <h2>Item</h2>
+          <h2>User</h2>
         </HeaderLeft>
         <HeaderRight>
           <Dropdown
