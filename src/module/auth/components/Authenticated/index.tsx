@@ -7,22 +7,28 @@ import { Button, Dropdown, Menu } from "antd";
 import { useAuth } from "../../../../context/auth-context";
 
 const Authenticated = () => {
-  const {logout, user} = useAuth();
+  const { logout, user } = useAuth();
   return (
     <Container>
       <Header between={true}>
         <HeaderLeft gap={true}>
-          <SoftwareLogo width={"18rem"} color={'rgb(38.132, 255)'}/>
+          <SoftwareLogo width={"18rem"} color={"rgb(38.132, 255)"} />
           <h2>項目</h2>
           <h2>用戶</h2>
         </HeaderLeft>
         <HeaderRight>
-          <Dropdown overlay={<Menu>
-             <Menu.Item key={"logout"}>
-               <Button type={"link"}>Logout</Button>
-             </Menu.Item>
-          </Menu>}>
-            <Button type={"link"} href="" onClick={e => e.preventDefault()}>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key={"logout"}>
+                  <Button type={"link"} onClick={logout}>
+                    Logout
+                  </Button>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button type={"link"} href="" onClick={(e) => e.preventDefault()}>
               Hi, {user?.name}
             </Button>
           </Dropdown>
@@ -32,14 +38,10 @@ const Authenticated = () => {
         <ProjectList />
       </Main>
     </Container>
-  )
-}
+  );
+};
 
 export default Authenticated;
-
-
-
-
 
 const Container = styled.div`
   display: grid;
