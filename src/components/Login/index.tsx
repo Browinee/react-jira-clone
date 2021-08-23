@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { LongButton } from "../Button";
+import useAsync from "../../hook/useAsync";
 
 interface SubmitProps {
   username: string;
@@ -8,15 +9,16 @@ interface SubmitProps {
 }
 
 interface LoginProps {
-  login: (value: SubmitProps) => void;
+  login: (value: SubmitProps) => Promise<void>;
   onError: (error: Error | null) => void;
 }
 
 export const Login = (props: LoginProps) => {
   const { login, onError } = props;
+  const { isLoading, run } = useAsync(undefined, { throwOnError: true });
   const handleSubmit = async (values: SubmitProps) => {
     try {
-      await login(values);
+      await run(login(values));
     } catch (e) {
       onError(e);
     }
@@ -37,7 +39,7 @@ export const Login = (props: LoginProps) => {
         <Input placeholder={"Password"} type="password" id={"password"} />
       </Form.Item>
       <Form.Item>
-        <LongButton type="primary" htmlType="submit">
+        <LongButton loading={isLoading} type="primary" htmlType="submit">
           Login
         </LongButton>
       </Form.Item>

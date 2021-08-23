@@ -19,6 +19,7 @@ interface LoginProps {
   username: string;
   password: string;
 }
+
 const UnAuthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(true);
   const { register, login } = useAuth();

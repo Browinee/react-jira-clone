@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { LongButton } from "../Button";
+import useAsync from "../../hook/useAsync";
 
 interface SubmitProps {
   username: string;
@@ -9,19 +10,20 @@ interface SubmitProps {
 }
 
 interface RegisterProps {
-  register: (value: SubmitProps) => void;
+  register: (value: SubmitProps) => Promise<void>;
   onError: (error: Error | null) => void;
 }
 
 export const Register = (props: RegisterProps) => {
   const { register, onError } = props;
+  const { isLoading, run } = useAsync(undefined, { throwOnError: true });
   const handleSubmit = async (values: SubmitProps) => {
     if (values.cpassword !== values.password) {
       onError(new Error("Please make sure two passwords are the same."));
       return;
     }
     try {
-      await register(values);
+      await run(register(values));
     } catch (e) {
       onError(e);
     }
@@ -52,7 +54,7 @@ export const Register = (props: RegisterProps) => {
         />
       </Form.Item>
       <Form.Item>
-        <LongButton type="primary" htmlType="submit">
+        <LongButton loading={isLoading} type="primary" htmlType="submit">
           Register
         </LongButton>
       </Form.Item>
