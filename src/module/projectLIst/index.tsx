@@ -2,31 +2,26 @@ import { useEffect, useState } from "react";
 import { SearchPanel } from "./components/SearchPanel";
 import { List } from "./components/List";
 import useDebounce from "../../hook/useDebounce";
-import { useHttp } from "../../utils/http";
 import useMount from "../../hook/useMount";
-import { cleanObject } from "../../utils";
+import useProjects from "../../hook/useProjects";
+import useUsers from "../../hook/useUsers";
+import { Typography } from "antd";
 
 const ProjectList = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [param, setParam] = useState({
     name: "",
-    personId: ""
+    personId: "",
   });
   const debouncedParam = useDebounce(param, 200);
-  const [list, setList] = useState([]);
-  const client = useHttp();
-  useEffect(() => {
-    client("projects", { data: cleanObject((debouncedParam)) }).then(setList);
-  }, [debouncedParam]);
-  useMount(() => {
-    // client("users").then(setUsers);
-  });
+  const { isLoading, error, data: list } = useProjects(debouncedParam);
+  const { data: users } = useUsers();
   return (
     <div>
-      <SearchPanel users={[]} param={{}} setParam={() => {
-      }} />
-      <List users={[]} dataSource={[]} loading={isLoading}/>
+      <SearchPanel users={users || []} param={param} setParam={setParam} />
+      {error ? (
+        <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
+      ) : null}
+      <List users={users || []} dataSource={list || []} loading={isLoading} />
     </div>
   );
 };
