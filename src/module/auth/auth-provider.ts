@@ -23,10 +23,11 @@ export const login = async (data: { username: string; password: string }) => {
     },
     body: JSON.stringify(data),
   }).then(async (response) => {
+    const result = await response.json();
     if (response.ok) {
-      return handleUserResponse(await response.json());
+      return handleUserResponse(result);
     } else {
-      return Promise.reject(await response.json());
+      return Promise.reject(result);
     }
   });
 };

@@ -6,13 +6,20 @@ interface SubmitProps {
   username: string;
   password: string;
 }
+
 interface LoginProps {
   login: (value: SubmitProps) => void;
+  onError: (error: Error | null) => void;
 }
+
 export const Login = (props: LoginProps) => {
-  const {login} = props;
-  const handleSubmit = (values: SubmitProps) => {
-    login(values);
+  const { login, onError } = props;
+  const handleSubmit = async (values: SubmitProps) => {
+    try {
+      await login(values);
+    } catch (e) {
+      onError(e);
+    }
   };
 
   return (
@@ -31,7 +38,7 @@ export const Login = (props: LoginProps) => {
       </Form.Item>
       <Form.Item>
         <LongButton type="primary" htmlType="submit">
-         Login
+          Login
         </LongButton>
       </Form.Item>
     </Form>

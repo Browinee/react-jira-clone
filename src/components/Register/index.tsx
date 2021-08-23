@@ -10,12 +10,17 @@ interface SubmitProps {
 
 interface RegisterProps {
   register: (value: SubmitProps) => void;
+  onError: (error: Error | null) => void;
 }
 
 export const Register = (props: RegisterProps) => {
-  const { register } = props;
-  const handleSubmit = (values: SubmitProps) => {
-    register(values);
+  const { register, onError } = props;
+  const handleSubmit = async (values: SubmitProps) => {
+    try {
+      await register(values);
+    } catch (e) {
+      onError(e);
+    }
   };
 
   return (
@@ -36,7 +41,11 @@ export const Register = (props: RegisterProps) => {
         name={"cpassword"}
         rules={[{ required: true, message: "Please confirm password" }]}
       >
-        <Input placeholder={"Please confirm password"} type="password" id={"cpassword"} />
+        <Input
+          placeholder={"Please confirm password"}
+          type="password"
+          id={"cpassword"}
+        />
       </Form.Item>
       <Form.Item>
         <LongButton type="primary" htmlType="submit">

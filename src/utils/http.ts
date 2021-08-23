@@ -3,7 +3,6 @@ import { useAuth } from "../context/auth-context";
 import { useCallback } from "react";
 import qs from "qs";
 const apiUrl = process.env.REACT_APP_API_URL;
-console.log("apiUrl", process.env);
 
 interface Config extends RequestInit {
   token?: string;
