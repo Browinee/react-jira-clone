@@ -16,6 +16,10 @@ interface RegisterProps {
 export const Register = (props: RegisterProps) => {
   const { register, onError } = props;
   const handleSubmit = async (values: SubmitProps) => {
+    if (values.cpassword !== values.password) {
+      onError(new Error("Please make sure two passwords are the same."));
+      return;
+    }
     try {
       await register(values);
     } catch (e) {
@@ -39,10 +43,10 @@ export const Register = (props: RegisterProps) => {
       </Form.Item>
       <Form.Item
         name={"cpassword"}
-        rules={[{ required: true, message: "Please confirm password" }]}
+        rules={[{ required: true, message: "Please enter confirmed password" }]}
       >
         <Input
-          placeholder={"Please confirm password"}
+          placeholder={"Please enter confirmed password"}
           type="password"
           id={"cpassword"}
         />
