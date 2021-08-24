@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SearchPanel } from "./components/SearchPanel";
 import { List } from "./components/List";
 import useDebounce from "../../hook/useDebounce";
-import useMount from "../../hook/useMount";
 import useProjects from "../../hook/useProjects";
 import useUsers from "../../hook/useUsers";
 import { Button, Typography } from "antd";
