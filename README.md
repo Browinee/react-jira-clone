@@ -17,8 +17,8 @@ Register an account then loign.
   - [x] Add jira-dev-tool
   - [X] Ant design and customized theme. 
 - Module
-  - [x] Login and Register 
-
+  - [x] Login and Register and Logout
+  - [ ] Board 
 
 ### Teck Stack
 - create-react-app --template typescript
