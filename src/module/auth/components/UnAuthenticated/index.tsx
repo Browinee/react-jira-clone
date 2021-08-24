@@ -8,6 +8,7 @@ import left from "assets/left.svg";
 import right from "assets/right.svg";
 import { LongButton } from "../../../../components/Button";
 import { useAuth } from "../../../../context/auth-context";
+import useDocumentTitle from "../../../../hook/useDocumentTitle";
 
 interface RegisterProps {
   username: string;
@@ -31,6 +32,8 @@ const UnAuthenticatedApp = () => {
     await register(values);
   };
   const switchHandler = () => setIsRegister(!isRegister);
+  useDocumentTitle("Please login in to continue.", false);
+
   return (
     <Container>
       <Header />
