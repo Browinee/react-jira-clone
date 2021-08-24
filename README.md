@@ -1,7 +1,16 @@
 # React-Jira-Clone
 
 ### Demo
-https://react-jira-clone.vercel.app/
+https://react-jira-clone-browinee.vercel.app/
+
+### Setup
+```
+yarn
+```
+```javascript
+yarn start
+```
+Register an account then loign.
 ### Todo
 - Infra
   - [x] Replace react-script with craco
