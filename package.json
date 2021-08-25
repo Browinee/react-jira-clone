@@ -57,6 +57,7 @@
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
     "@types/qs": "^6.9.7",
+    "@welldone-software/why-did-you-render": "^6.2.1",
     "eslint-config-prettier": "^8.1.0",
     "lint-staged": "10.2.9",
     "msw": "^0.34.0",
