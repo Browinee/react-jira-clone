@@ -4,7 +4,10 @@ import { User } from "../../../types/user";
 
 interface SearchPanelProps {
   users: User[];
-  param: any;
+  param: {
+    name: string;
+    personId: string;
+  };
   setParam: (param: SearchPanelProps["param"]) => void;
 }
 

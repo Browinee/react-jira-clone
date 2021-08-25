@@ -7,15 +7,15 @@ import useUsers from "../../hook/useUsers";
 import { Button, Typography } from "antd";
 import Row from "../../components/Row";
 import styled from "@emotion/styled";
+import useUrlQueryParam from "../../hook/useUrlQueryParam";
+import useDocumentTitle from "../../hook/useDocumentTitle";
 
 const ProjectList = () => {
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const debouncedParam = useDebounce(param, 200);
   const { isLoading, error, data: list } = useProjects(debouncedParam);
   const { data: users } = useUsers();
+  useDocumentTitle("Item List", false);
   return (
     <ScreenContainer>
       <Row marginBottom={2} between={true}>
@@ -32,7 +32,7 @@ const ProjectList = () => {
     </ScreenContainer>
   );
 };
-
+ProjectList.whyDiDYouRender = true;
 export default ProjectList;
 
 export const ScreenContainer = styled.div`
