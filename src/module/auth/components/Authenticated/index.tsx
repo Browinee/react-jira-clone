@@ -8,6 +8,7 @@ import { useAuth } from "../../../../context/auth-context";
 import { Navigate, Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import ProjectScreen from "../../../projectScreen";
+import { resetRoutes } from "../../../../utils";
 
 const Container = styled.div`
   display: grid;
@@ -38,6 +39,7 @@ const Authenticated = () => {
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
             />
+            <Navigate to={"/projects"} />
           </Routes>
         </Router>
       </Main>
@@ -49,7 +51,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38.132, 255)"} />
+        <Button type={"link"} onClick={resetRoutes}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38.132, 255)"} />
+        </Button>
         <h2>Item</h2>
         <h2>User</h2>
       </HeaderLeft>
