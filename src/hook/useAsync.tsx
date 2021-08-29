@@ -5,22 +5,23 @@ interface State<T> {
   data: T | null;
   status: "idle" | "loading" | "error" | "success";
 }
+
 const defaultInitialState: State<null> = {
   status: "idle",
   data: null,
-  error: null,
+  error: null
 };
 
 const defaultConfig = {
-  throwOnError: false,
+  throwOnError: false
 };
-const useAsync = <T,>(
+const useAsync = <T, >(
   initialState?: State<T>,
   initialConfig?: typeof defaultConfig
 ) => {
   const [state, setState] = useState<State<T>>({
     ...defaultInitialState,
-    ...initialState,
+    ...initialState
   });
   const config = { ...defaultConfig, ...initialConfig };
 
@@ -28,28 +29,36 @@ const useAsync = <T,>(
     setState({
       status: "success",
       error: null,
-      data,
+      data
     });
   const setError = (error: Error) =>
     setState({
       error,
       status: "error",
-      data: null,
+      data: null
     });
 
-  const run = (promise: Promise<T>) => {
+  const run = (promise: Promise<T>, runConfig?: { retry: () => Promise<T> }) => {
     if (!promise || !promise.then) {
       throw new Error("Please enter a Promise");
     }
+    setRetry(() => () => {
+      if (runConfig?.retry) {
+        run(runConfig?.retry(), runConfig);
+      }
+    });
     setState({
       ...state,
-      status: "loading",
+      status: "loading"
     });
     return promise.then(setData).catch((error) => {
       setError(error);
       if (config.throwOnError) return Promise.reject(error);
     });
   };
+  const [retry, setRetry] = useState(() => () => {
+  });
+
   return {
     isIdle: state.status === "idle",
     isLoading: state.status === "loading",
@@ -57,8 +66,9 @@ const useAsync = <T,>(
     isSuccess: state.status === "success",
     setData,
     setError,
+    retry,
     run,
-    ...state,
+    ...state
   };
 };
 
