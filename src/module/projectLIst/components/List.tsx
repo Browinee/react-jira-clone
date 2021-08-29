@@ -46,6 +46,8 @@ const generateTableColumn = (users: User[]) => [
   },
 ];
 export const List = ({ users, ...props }: ListProps) => {
+  console.log("generateTableColumn(users)", generateTableColumn(users));
+  console.log("users",  {users, props});
   return (
     <Table
       rowKey={"id"}

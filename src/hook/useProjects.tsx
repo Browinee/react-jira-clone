@@ -11,6 +11,7 @@ const useProjects = (param?: Partial<Project>) => {
   useEffect(() => {
     run(getProjects());
   }, [param]);
+  console.log("result", result);
   return result;
 };
 
