@@ -1,10 +1,9 @@
 import React from "react";
-import { Select } from "components/Select";
+import IdSelect, { IdSelectProps } from "../id-select";
 import useUsers from "../../hook/useUsers";
-
-
-type a  = React.ComponentProps<typeof Select>
-export const UserSelect = (props: React.ComponentProps<typeof Select>) => {
+function UserSelect(props: React.ComponentProps<typeof IdSelect>) {
   const { data: users } = useUsers();
-  return <Select options={users || []} {...props} />;
-};
+  return <IdSelect options={users || []} {...props} />;
+}
+
+export default UserSelect;
